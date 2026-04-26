@@ -19,7 +19,6 @@ h3 { color:#00AEEF; }
 
 st.markdown("<h1>SMART DIGITAL TWIN SYSTEM</h1>", unsafe_allow_html=True)
 
-# ---------------- LOAD CSV ----------------
 df_full = pd.read_csv("data/real_time_data.csv")
 
 if "index" not in st.session_state:
@@ -32,7 +31,7 @@ if st.session_state.index > len(df_full):
 df = df_full.iloc[:st.session_state.index]
 df = df.tail(50)
 
-# ---------------- CURRENT VALUES ----------------
+
 temp = df["temperature"].iloc[-1]
 battery = df["battery"].iloc[-1]
 pressure = df["pressure"].iloc[-1]
@@ -44,7 +43,7 @@ model = LinearRegression().fit(X, df["temperature"])
 linear_line = model.predict(X)
 pred_linear = model.predict([[len(df)]])[0]
 
-# ---------------- LSTM ----------------
+
 try:
     from tensorflow.keras.models import load_model
     import joblib
@@ -61,14 +60,12 @@ try:
 except:
     pred_lstm = pred_linear
 
-# ---------------- ERROR ----------------
 mse_lr = mean_squared_error(df["temperature"], linear_line)
 mse_lstm = (df["temperature"].iloc[-1] - pred_lstm) ** 2
 
-# ---------------- STATUS ----------------
 status = "CRITICAL" if anomaly == 1 else "NORMAL"
 
-# ---------------- RISK ----------------
+
 risk = 0
 if anomaly == 1:
     risk += 50
@@ -78,7 +75,6 @@ risk += min(max((pressure-1000)/50,0),1)*20
 risk += min(max((60-battery)/60,0),1)*10
 risk = round(min(risk,100),2)
 
-# ---------------- RECOMMEND ----------------
 rec = []
 
 if anomaly == 1:
@@ -93,10 +89,8 @@ if battery < 60:
 if not rec:
     rec.append("System stable")
 
-# ---------------- LAYOUT ----------------
 col1, col2 = st.columns([2,1])
 
-# ---------------- GRAPH ----------------
 with col1:
     st.markdown("### Live Monitoring")
 
@@ -111,7 +105,7 @@ with col1:
     ax.plot(x, bat_n, label="Battery", linewidth=2)
     ax.plot(x, pres_n, label="Pressure", linewidth=2)
 
-    # 🔥 ANOMALY MARKERS FIXED
+ 
     for i in range(len(df)):
         if df["temperature"].iloc[i] > 60:
             ax.scatter(i, temp_n.iloc[i], s=70, color="red")
@@ -128,7 +122,7 @@ with col1:
     ax.legend()
     st.pyplot(fig)
 
-    # ---------------- PREDICTION GRAPH FIXED ----------------
+    
     st.markdown("### Prediction Analysis")
 
     fig2, ax2 = plt.subplots(figsize=(10,4))
@@ -136,7 +130,7 @@ with col1:
     ax2.plot(x, df["temperature"], label="Actual", linewidth=2)
     ax2.plot(x, linear_line, label="Linear", linestyle="--")
 
-    # Clean future points
+
     ax2.scatter(len(df), pred_lstm, s=120, color="green", label="LSTM Future")
     ax2.text(len(df)+0.5, pred_lstm+0.5, "LSTM", fontsize=9, color="green")
 
@@ -151,7 +145,6 @@ with col1:
     ax2.legend()
     st.pyplot(fig2)
 
-# ---------------- SIDE PANEL ----------------
 with col2:
     st.markdown("### System Overview")
     st.write(f"Temperature: {temp:.2f}")
@@ -192,7 +185,6 @@ with col2:
     for r in rec:
         st.write("•", r)
 
-# ---------------- 3D ----------------
 st.markdown("### 3D Digital Twin")
 
 fig3 = px.scatter_3d(
@@ -204,7 +196,6 @@ fig3 = px.scatter_3d(
 )
 st.plotly_chart(fig3, use_container_width=True)
 
-# ---------------- AI ----------------
 st.markdown("### AI Assistant")
 
 query = st.text_input("Ask anything")
@@ -212,7 +203,6 @@ query = st.text_input("Ask anything")
 if query:
     st.write(f"System is {status} with risk {risk}%.\nTemp={temp}, Battery={battery}, Pressure={pressure}")
 
-# ---------------- TABLE ----------------
 st.markdown("### Live Data")
 st.dataframe(df.tail(10), use_container_width=True)
 
