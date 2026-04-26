@@ -1,38 +1,43 @@
-🚀 Smart Digital Twin System
+ Smart Digital Twin System
 
-📌 Overview
+🎥 Demo Video
 
-This project is a Smart Digital Twin System that simulates real-time IoT data and uses Machine Learning models to monitor system health, detect anomalies, and predict future behavior.
-
-The system integrates LSTM (deep learning) and Linear Regression to provide predictive insights along with interactive visualizations.
+👉 "Watch Demo" https://drive.google.com/file/d/1gkwx64HxBuDSk6WUTPFbzV7PVXKP9AdM/view?usp=sharing
 
 ---
 
-⚙️ Features
+🌐 Overview
 
-- Real-time monitoring of Temperature, Battery, and Pressure
-- Anomaly detection system
-- Risk score calculation
-- LSTM-based prediction
-- Linear Regression comparison
-- Prediction visualization (Actual vs Predicted)
-- 3D Digital Twin representation
-- AI-based system insights and recommendations
+This project presents a Smart Digital Twin System that simulates real-time IoT data and provides intelligent monitoring, anomaly detection, and predictive insights using Machine Learning.
+
+The system continuously tracks temperature, battery, and pressure, and visualizes system behavior through an interactive dashboard.
 
 ---
 
-🛠️ Tech Stack
+✨ Features
 
-- Python
-- Streamlit
-- NumPy & Pandas
-- Scikit-learn
-- TensorFlow / Keras (LSTM)
-- Matplotlib & Plotly
+✔ Real-time data simulation & monitoring
+✔ Anomaly detection based on system conditions
+✔ Risk scoring for system health evaluation
+✔ Prediction using LSTM & Linear Regression
+✔ Model performance comparison
+✔ Interactive dashboard using Streamlit
+✔ 3D visualization of system behavior
 
 ---
 
-📂 Project Structure
+🛠 Tech Stack
+
+- 🐍 Python
+- ⚡ Streamlit
+- 📊 NumPy & Pandas
+- 🤖 Scikit-learn
+- 🧠 TensorFlow / Keras (LSTM)
+- 📈 Matplotlib & Plotly
+
+---
+
+📁 Project Structure
 
 Smart-digital-twin-system/
 │── app.py
@@ -43,17 +48,17 @@ Smart-digital-twin-system/
 
 ---
 
-▶️ How to Run
+⚙️ How to Run
 
-1. Install dependencies:
+1️⃣ Install dependencies
 
 pip install -r requirements.txt
 
-2. Run the application:
+2️⃣ Run the application
 
 streamlit run app.py
 
-3. Open in browser:
+3️⃣ Open in browser
 
 http://localhost:8501
 
@@ -63,21 +68,20 @@ http://localhost:8501
 
 The system provides:
 
-- Live monitoring dashboard
-- Prediction analysis (LSTM vs Linear Regression)
-- Risk score visualization
-- System status (Normal / Critical)
-- 3D Digital Twin visualization
-- AI-based insights
+📈 Live monitoring dashboard
+📉 Prediction graphs (Actual vs Linear vs LSTM)
+⚠ Risk score & system status
+🔮 Future insights and recommendations
+🌐 3D digital twin visualization
 
 ---
 
-💡 Future Improvements
+🚀 Future Improvements
 
-- Deploy the system on cloud platforms
-- Integrate real IoT sensor data
-- Improve anomaly detection models
-- Enhance UI/UX design
+- Integration with real IoT sensor data
+- Advanced anomaly detection models
+- Alert system (email/notifications)
+- Cloud deployment
 
 ---
 
@@ -85,4 +89,3 @@ The system provides:
 Aastha Bahuguna
 
 Aastha Bahuguna
-Engineering Student | Machine Learning Enthusiast
