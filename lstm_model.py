@@ -7,22 +7,18 @@ from sklearn.preprocessing import MinMaxScaler
 
 MODEL_PATH = "lstm_model.keras"
 SCALER_PATH = "scaler.pkl"
-SEQ_LEN = 5
+SEQ_LEN = 10   # 🔥 matches your app (you used last 10 values)
 
 def get_lstm_model(data):
 
-    
-    if len(data) < SEQ_LEN + 1:
-        raise ValueError("Not enough data for LSTM")
-
-    
+    # ✅ If model already exists → load it
     if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
         model = load_model(MODEL_PATH, compile=False)
         with open(SCALER_PATH, "rb") as f:
             scaler = pickle.load(f)
         return model, scaler
 
-    
+    # 🔹 Train new model
     scaler = MinMaxScaler()
     data_scaled = scaler.fit_transform(data.reshape(-1,1))
 
@@ -40,8 +36,8 @@ def get_lstm_model(data):
     model.compile(optimizer='adam', loss='mse')
     model.fit(X, y, epochs=5, verbose=0)
 
+    # 💾 Save model + scaler
     model.save(MODEL_PATH)
-
     with open(SCALER_PATH, "wb") as f:
         pickle.dump(scaler, f)
 
@@ -50,6 +46,7 @@ def get_lstm_model(data):
 
 def predict_lstm(model, scaler, data):
 
+    # 🔹 If not enough data
     if len(data) < SEQ_LEN:
         return data[-1]
 
