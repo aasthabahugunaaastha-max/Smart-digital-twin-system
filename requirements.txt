@@ -1,0 +1,7 @@
+streamlit
+numpy
+pandas
+matplotlib
+scikit-learn
+plotly
+tensorflow-cpu==2.12.0
